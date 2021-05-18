@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">foodtoday</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_nav_label">Home</string>
+    <string name="favorite_nav_label">Favorite</string>
+    <string name="today_nav_label">Today</string>
 </resources>
