@@ -5,4 +5,16 @@
     <string name="home_nav_label">Home</string>
     <string name="favorite_nav_label">Favorite</string>
     <string name="today_nav_label">Today</string>
+    <string name="floating_menu">floating menu</string>
+    <string name="emoji_no_internet">emoji_no_internet</string>
+    <string name="no_internet_text">No Internet Conection</string>
+    <string name="description_text_resources">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="food_img">food_img</string>
+    <string name="tittle_recipe_text">Tittle recipe</string>
+    <string name="favorite_img_recipe">favorite_img_recipe</string>
+    <string name="favorite_count_text">100</string>
+    <string name="time_count_text">100</string>
+    <string name="vegan_count_text">100</string>
+    <string name="vegan_image_content">vegan_image_content</string>
+    <string name="time_image_content">time_image_content</string>
 </resources>
