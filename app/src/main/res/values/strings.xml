@@ -14,7 +14,7 @@
     <string name="favorite_img_recipe">favorite_img_recipe</string>
     <string name="favorite_count_text">100</string>
     <string name="time_count_text">100</string>
-    <string name="vegan_count_text">100</string>
+    <string name="vegan_count_text">Vegan</string>
     <string name="vegan_image_content">vegan_image_content</string>
     <string name="time_image_content">time_image_content</string>
 </resources>

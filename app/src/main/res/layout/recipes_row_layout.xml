@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="result"
             type="com.example.foody.models.Result" />
@@ -37,9 +38,10 @@
 
                 <ImageView
                     android:id="@+id/recipe_imageView"
-                    android:layout_width="200dp"
-                    android:contentDescription="@string/food_img"
+                    loadImageFromUrl="@{result.image}"
+                    android:layout_width="170dp"
                     android:layout_height="0dp"
+                    android:contentDescription="@string/food_img"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -56,14 +58,15 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/poppins"
                     android:maxLines="2"
-                    android:text="@string/tittle_recipe_text"
+                    android:text="@{result.title}"
                     android:textColor="@color/darker"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/recipe_imageView"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/tittle_recipe_text" />
 
                 <TextView
                     android:id="@+id/description_textView"
@@ -72,11 +75,12 @@
                     android:layout_marginTop="12dp"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    android:text="@string/description_text_resources"
+                    android:text="@{result.summary}"
                     android:textColor="@color/darkGray"
                     app:layout_constraintEnd_toEndOf="@+id/tittle_textView"
                     app:layout_constraintStart_toStartOf="@+id/tittle_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/tittle_textView" />
+                    app:layout_constraintTop_toBottomOf="@+id/tittle_textView"
+                    tools:text="@string/description_text_resources" />
 
                 <ImageView
                     android:id="@+id/favorite_imageView"
@@ -84,63 +88,63 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="36dp"
-                    app:tint="@color/red"
                     android:contentDescription="@string/favorite_img_recipe"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/favorite_textView"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/favorite_textView"
                     app:layout_constraintTop_toBottomOf="@+id/description_textView"
-                    app:layout_constraintVertical_bias="0.0"
-                    app:srcCompat="@drawable/ic_favorite" />
+                    app:srcCompat="@drawable/ic_favorite"
+                    app:tint="@color/red" />
 
                 <TextView
                     android:id="@+id/favorite_textView"
+                    setNumberOfLikes="@{result.aggregateLikes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/favorite_count_text"
                     android:textAlignment="center"
                     app:layout_constraintStart_toStartOf="@+id/description_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/favorite_imageView" />
+                    app:layout_constraintTop_toBottomOf="@+id/favorite_imageView"
+                    tools:text="@string/favorite_count_text" />
 
                 <ImageView
                     android:id="@+id/time_imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:tint="@color/yellow"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
                     android:contentDescription="@string/time_image_content"
                     app:layout_constraintEnd_toEndOf="@+id/time_textView"
                     app:layout_constraintStart_toStartOf="@+id/time_textView"
                     app:layout_constraintTop_toTopOf="@+id/favorite_imageView"
-                    app:srcCompat="@drawable/ic_time" />
+                    app:srcCompat="@drawable/ic_time"
+                    app:tint="@color/yellow" />
 
                 <TextView
                     android:id="@+id/time_textView"
+                    setNumberOfMinutes="@{result.readyInMinutes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:text="@string/time_count_text"
+                    android:layout_marginStart="30dp"
                     android:textAlignment="center"
                     app:layout_constraintStart_toEndOf="@+id/favorite_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/time_imageView" />
+                    app:layout_constraintTop_toBottomOf="@+id/time_imageView"
+                    tools:text="@string/time_count_text" />
 
                 <ImageView
-                    android:contentDescription="@string/vegan_image_content"
                     android:id="@+id/vegan_imageView"
+                    applyVeganColor="@{result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/vegan_image_content"
                     app:layout_constraintEnd_toEndOf="@+id/vegan_textView"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/vegan_textView"
                     app:layout_constraintTop_toTopOf="@+id/time_imageView"
-                    app:srcCompat="@drawable/ic_vegan"
-                    app:tint="@color/green" />
+                    app:srcCompat="@drawable/ic_vegan" />
 
                 <TextView
                     android:id="@+id/vegan_textView"
+                    applyVeganColor="@{result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="30dp"
                     android:text="@string/vegan_count_text"
                     android:textAlignment="center"
                     app:layout_constraintStart_toEndOf="@+id/time_textView"
