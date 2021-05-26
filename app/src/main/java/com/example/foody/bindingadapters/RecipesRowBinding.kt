@@ -21,6 +21,7 @@ class RecipesRowBinding {
             imageView.load(imageUrl) {
                 crossfade(600)
                 RoundedCornersTransformation(10f, 10f, 10f, 10f)
+                error(R.drawable.ic_error_placeholder)
             }
         }
 

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foody.viewmodels.MainViewModel
 import com.example.foody.R
 import com.example.foody.adapters.RecipesAdapter
+import com.example.foody.databinding.FragmentHomeBinding
 import com.example.foody.util.NetworkResult
 import com.example.foody.util.observeOnce
 import com.example.foody.viewmodels.RecipesViewModel
@@ -24,10 +25,12 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var mainViewModel: MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
     private val mAdapter by lazy { RecipesAdapter() }
-    private lateinit var mView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,17 +43,19 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.mainViewModel = mainViewModel
 
         setupRecyclerView()
         readDatabase()
 
-        return mView
+        return binding.root
     }
 
     private fun setupRecyclerView() {
-        mView.recipe_recyclerView.adapter = mAdapter
-        mView.recipe_recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recipeRecyclerView.adapter = mAdapter
+        binding.recipeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         showShimmerEffect()
     }
 
@@ -107,10 +112,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun showShimmerEffect() {
-        mView.recipe_recyclerView.showShimmer()
+        binding.recipeRecyclerView.showShimmer()
     }
 
     private fun hideShimmerEffect() {
-        mView.recipe_recyclerView.hideShimmer()
+        binding.recipeRecyclerView.hideShimmer()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
