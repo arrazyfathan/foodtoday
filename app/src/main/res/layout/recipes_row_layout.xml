@@ -39,7 +39,7 @@
                 <ImageView
                     android:id="@+id/recipe_imageView"
                     loadImageFromUrl="@{result.image}"
-                    android:layout_width="170dp"
+                    android:layout_width="160dp"
                     android:layout_height="0dp"
                     android:contentDescription="@string/food_img"
                     android:scaleType="centerCrop"
