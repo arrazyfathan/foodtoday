@@ -33,7 +33,12 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         name = PREFERENCES_NAME
     )
 
-    suspend fun saveMealAndDietType(mealType: String, mealTypeId: Int, dietType: String, dietTypeId: Int) {
+    suspend fun saveMealAndDietType(
+        mealType: String,
+        mealTypeId: Int,
+        dietType: String,
+        dietTypeId: Int
+    ) {
         dataStore.edit { preferences ->
             preferences[PreferenceKeys.selectedMealType] = mealType
             preferences[PreferenceKeys.selectedMealTypeId] = mealTypeId
@@ -46,7 +51,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         .catch { exception ->
             if (exception is IOException) {
                 emit(emptyPreferences())
-            }else{
+            } else {
                 throw exception
             }
         }
@@ -54,12 +59,12 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             val selectedMealType = preferences[PreferenceKeys.selectedMealType] ?: DEFAULT_MEAL_TYPE
             val selectedMealTypeId = preferences[PreferenceKeys.selectedMealTypeId] ?: 0
             val selectedDietType = preferences[PreferenceKeys.selectedDietType] ?: DEFAULT_DIET_TYPE
-            val selectedDietTypeId= preferences[PreferenceKeys.selectedDietTypeId] ?: 0
+            val selectedDietTypeId = preferences[PreferenceKeys.selectedDietTypeId] ?: 0
             MealAndDietType(
                 selectedMealType,
                 selectedMealTypeId,
                 selectedDietType,
-                selectedMealTypeId
+                selectedDietTypeId
             )
         }
 }
@@ -68,5 +73,5 @@ data class MealAndDietType(
     val selectedMealType: String,
     val selectedMealTypeId: Int,
     val selectedDietType: String,
-    val selectedMealId: Int
+    val selectedDietTypeId: Int
 )
