@@ -1,18 +1,38 @@
 package com.example.foody.bindingadapters
 
+
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import androidx.navigation.findNavController
 import coil.load
-import coil.request.ImageRequest
-import coil.transform.RoundedCornersTransformation
 import com.example.foody.R
+import com.example.foody.models.Result
+import com.example.foody.ui.fragments.recipes.HomeFragmentDirections
+import org.jsoup.Jsoup
+import java.lang.Exception
 
 class RecipesRowBinding {
 
     companion object {
+        @BindingAdapter("onRecipeClickListener")
+        @JvmStatic
+        fun onRecipeClickListener(recipeRowLayout: ConstraintLayout, result: Result) {
+            Log.d("onRecipeClickListener", "CALLED")
+            recipeRowLayout.setOnClickListener {
+                try {
+                    val action =
+                        HomeFragmentDirections.actionHomeFragmentToDetailsActivity(result)
+                    recipeRowLayout.findNavController().navigate(action)
+                } catch (e: Exception) {
+                    Log.d("onRecipeClickListener", e.toString())
+                }
+            }
+        }
 
         @BindingAdapter("loadImageFromUrl")
         @JvmStatic
@@ -20,7 +40,6 @@ class RecipesRowBinding {
 
             imageView.load(imageUrl) {
                 crossfade(600)
-                RoundedCornersTransformation(10f, 10f, 10f, 10f)
                 error(R.drawable.ic_error_placeholder)
             }
         }
