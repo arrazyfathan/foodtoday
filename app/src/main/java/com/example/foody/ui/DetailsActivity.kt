@@ -3,8 +3,16 @@ package com.example.foody.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.navArgs
 import com.example.foody.R
+import com.example.foody.adapters.PagerAdapter
+import com.example.foody.ui.fragments.ingredients.IngredientsFragment
+import com.example.foody.ui.fragments.instructions.InstructionsFragment
+import com.example.foody.ui.fragments.overview.OverviewFragment
+import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -14,6 +22,39 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-        Log.d("DetailsActivity", args.result.toString())
+        setSupportActionBar(toolbar)
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val fragments = ArrayList<Fragment>()
+        fragments.add(OverviewFragment())
+        fragments.add(IngredientsFragment())
+        fragments.add(InstructionsFragment())
+
+        val tittle = ArrayList<String>()
+        tittle.add("Overview")
+        tittle.add("Ingredients")
+        tittle.add("Instructions")
+
+        val resultBundle = Bundle()
+        resultBundle.putParcelable("recipeBundle", args.result)
+
+        val adapter = PagerAdapter(
+            resultBundle,
+            fragments,
+            tittle,
+            supportFragmentManager
+        )
+
+        viewPager.adapter = adapter
+        tabLayout.setupWithViewPager(viewPager)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
