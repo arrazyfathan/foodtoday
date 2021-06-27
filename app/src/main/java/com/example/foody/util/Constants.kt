@@ -22,6 +22,7 @@ class Constants {
         //ROOM Database
         const val DATABASE_NAME = "recipes_database"
         const val RECIPES_TABLE = "recipes_table"
+        const val FAVORITE_RECIPES_TABLE = "favorite_recipes_table"
 
         // Bottom Sheet and Preferences
         const val DEFAULT_MEAL_TYPE = "main course"
@@ -33,5 +34,7 @@ class Constants {
         const val PREFERENCES_DIET_TYPE = "dietType"
         const val PREFERENCES_DIET_TYPE_ID = "dietTypeId"
         const val PREFERENCES_BACK_ONLINE = "backOnline"
+
+
     }
 }

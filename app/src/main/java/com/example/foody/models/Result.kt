@@ -5,7 +5,6 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
-
 @Parcelize
 data class Result(
     @SerializedName("aggregateLikes")
@@ -19,7 +18,7 @@ data class Result(
     @SerializedName("glutenFree")
     val glutenFree: Boolean,
     @SerializedName("id")
-    val id: Int,
+    val recipeId: Int,
     @SerializedName("image")
     val image: String,
     @SerializedName("readyInMinutes")
