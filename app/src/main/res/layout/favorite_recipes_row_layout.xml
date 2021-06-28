@@ -1,25 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
-            name="result"
-            type="com.example.foody.models.Result" />
+            name="favoritesEntity"
+            type="com.example.foody.data.database.entities.FavoritesEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/recipes_row_layout"
-        onRecipeClickListener="@{result}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/recipe_row"
+            android:id="@+id/favorite_recipe_row"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
@@ -38,8 +35,7 @@
 
 
                 <ImageView
-                    android:id="@+id/recipe_imageView"
-                    loadImageFromUrl="@{result.image}"
+                    android:id="@+id/favorite_recipe_imageView"
                     android:layout_width="160dp"
                     android:layout_height="0dp"
                     android:contentDescription="@string/food_img"
@@ -50,7 +46,7 @@
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
-                    android:id="@+id/tittle_textView"
+                    android:id="@+id/favorite_tittle_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -65,7 +61,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/recipe_imageView"
+                    app:layout_constraintStart_toEndOf="@+id/favorite_recipe_imageView"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="@string/tittle_recipe_text" />
 
@@ -76,15 +72,14 @@
                     android:layout_marginTop="12dp"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    parseHtml="@{result.summary}"
                     android:textColor="@color/darkGray"
-                    app:layout_constraintEnd_toEndOf="@+id/tittle_textView"
-                    app:layout_constraintStart_toStartOf="@+id/tittle_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/tittle_textView"
+                    app:layout_constraintEnd_toEndOf="@+id/favorite_tittle_textView"
+                    app:layout_constraintStart_toStartOf="@+id/favorite_tittle_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/favorite_tittle_textView"
                     tools:text="@string/description_text_resources" />
 
                 <ImageView
-                    android:id="@+id/favorite_imageView"
+                    android:id="@+id/favorite_heart_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
@@ -99,57 +94,53 @@
 
                 <TextView
                     android:id="@+id/favorite_heart_textView"
-                    setNumberOfLikes="@{result.aggregateLikes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     app:layout_constraintStart_toStartOf="@+id/favorite_description_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/favorite_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/favorite_heart_imageView"
                     tools:text="@string/favorite_count_text" />
 
                 <ImageView
-                    android:id="@+id/time_imageView"
+                    android:id="@+id/favorite_time_imageView"
                     android:layout_width="26dp"
                     android:layout_height="26dp"
                     android:contentDescription="@string/time_image_content"
-                    app:layout_constraintEnd_toEndOf="@+id/time_textView"
-                    app:layout_constraintStart_toStartOf="@+id/time_textView"
-                    app:layout_constraintTop_toTopOf="@+id/favorite_imageView"
+                    app:layout_constraintEnd_toEndOf="@+id/favorite_time_textView"
+                    app:layout_constraintStart_toStartOf="@+id/favorite_time_textView"
+                    app:layout_constraintTop_toTopOf="@+id/favorite_heart_imageView"
                     app:srcCompat="@drawable/ic_time"
                     app:tint="@color/yellow" />
 
                 <TextView
-                    android:id="@+id/time_textView"
-                    setNumberOfMinutes="@{result.readyInMinutes}"
+                    android:id="@+id/favorite_time_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:textAlignment="center"
                     app:layout_constraintStart_toEndOf="@+id/favorite_heart_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/time_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/favorite_time_imageView"
                     tools:text="@string/time_count_text" />
 
                 <ImageView
-                    android:id="@+id/vegan_imageView"
-                    applyVeganColor="@{result.vegan}"
+                    android:id="@+id/favorite_vegan_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/vegan_image_content"
-                    app:layout_constraintEnd_toEndOf="@+id/vegan_textView"
-                    app:layout_constraintStart_toStartOf="@+id/vegan_textView"
-                    app:layout_constraintTop_toTopOf="@+id/time_imageView"
+                    app:layout_constraintEnd_toEndOf="@+id/favorite_vegan_textView"
+                    app:layout_constraintStart_toStartOf="@+id/favorite_vegan_textView"
+                    app:layout_constraintTop_toTopOf="@+id/favorite_time_imageView"
                     app:srcCompat="@drawable/ic_vegan" />
 
                 <TextView
-                    android:id="@+id/vegan_textView"
-                    applyVeganColor="@{result.vegan}"
+                    android:id="@+id/favorite_vegan_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:text="@string/vegan_count_text"
                     android:textAlignment="center"
-                    app:layout_constraintStart_toEndOf="@+id/time_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/vegan_imageView" />
+                    app:layout_constraintStart_toEndOf="@+id/favorite_time_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/favorite_vegan_imageView" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
