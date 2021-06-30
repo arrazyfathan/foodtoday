@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_favorite.view.*
 @AndroidEntryPoint
 class FavoriteFragment : Fragment() {
 
-    private val mAdapter: FavoriteRecipesAdapter by lazy { FavoriteRecipesAdapter() }
+    private val mAdapter: FavoriteRecipesAdapter by lazy { FavoriteRecipesAdapter(requireActivity()) }
     private val mainViewModel: MainViewModel by viewModels()
 
     private var _binding: FragmentFavoriteBinding? = null
