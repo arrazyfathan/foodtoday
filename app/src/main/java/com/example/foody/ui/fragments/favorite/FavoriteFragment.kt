@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foody.R
 import com.example.foody.adapters.FavoriteRecipesAdapter
+import com.example.foody.databinding.FragmentFavoriteBinding
 import com.example.foody.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_favorite.view.*
@@ -19,25 +20,40 @@ import kotlinx.android.synthetic.main.fragment_favorite.view.*
 class FavoriteFragment : Fragment() {
 
     private val mAdapter: FavoriteRecipesAdapter by lazy { FavoriteRecipesAdapter() }
-    private val mainViewMode: MainViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
+
+    private var _binding: FragmentFavoriteBinding? = null
+    val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_favorite, container, false)
 
-        setupRecyclerView(view.favoriteRecipesRecyclerView)
-        mainViewMode.readFavoriteRecipes.observe(viewLifecycleOwner, { favoriteEntity ->
-            mAdapter.setData(favoriteEntity)
-        })
-        return view
+        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.mainViewModel = mainViewModel
+        binding.mAdapter = mAdapter
+
+        setupRecyclerView(binding.favoriteRecipesRecyclerView)
+//
+//        mainViewModel.readFavoriteRecipes.observe(viewLifecycleOwner, { favoriteEntity ->
+//            mAdapter.setData(favoriteEntity)
+//        })
+
+        return binding.root
     }
 
     private fun setupRecyclerView(recycler: RecyclerView) {
         recycler.adapter = mAdapter
         recycler.layoutManager = LinearLayoutManager(requireContext())
+
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 
