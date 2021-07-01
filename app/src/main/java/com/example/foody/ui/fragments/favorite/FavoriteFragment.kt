@@ -19,8 +19,13 @@ import kotlinx.android.synthetic.main.fragment_favorite.view.*
 @AndroidEntryPoint
 class FavoriteFragment : Fragment() {
 
-    private val mAdapter: FavoriteRecipesAdapter by lazy { FavoriteRecipesAdapter(requireActivity()) }
     private val mainViewModel: MainViewModel by viewModels()
+    private val mAdapter: FavoriteRecipesAdapter by lazy {
+        FavoriteRecipesAdapter(
+            requireActivity(),
+            mainViewModel
+        )
+    }
 
     private var _binding: FragmentFavoriteBinding? = null
     val binding get() = _binding!!
@@ -54,6 +59,7 @@ class FavoriteFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        mAdapter.clearContextualActionMode()
     }
 
 
