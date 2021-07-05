@@ -108,7 +108,7 @@ class DetailsActivity : AppCompatActivity() {
                 0,
                 args.result
             )
-        mainViewModel.insertFavoriteRecipes(favoritesEntity)
+        mainViewModel.insertFavoriteRecipe(favoritesEntity)
         changeMenuItemColor(item, R.color.yellow)
         showSnackBar("Recipe saved.")
         recipeSaved = true
@@ -120,7 +120,7 @@ class DetailsActivity : AppCompatActivity() {
                 savedRecipeId,
                 args.result
             )
-        mainViewModel.deleteFavoriteRecipes(favoritesEntity)
+        mainViewModel.deleteFavoriteRecipe(favoritesEntity)
         changeMenuItemColor(item, R.color.white)
         showSnackBar("Removed from Favorites.")
         recipeSaved = false

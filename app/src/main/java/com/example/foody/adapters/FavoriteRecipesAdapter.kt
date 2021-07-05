@@ -142,7 +142,7 @@ class FavoriteRecipesAdapter(
     override fun onActionItemClicked(actionMode: ActionMode?, menu: MenuItem?): Boolean {
         if (menu?.itemId == R.id.delete_favorite_recipe_menu) {
             selectedRecipes.forEach {
-                mainViewModel.deleteFavoriteRecipes(it)
+                mainViewModel.deleteFavoriteRecipe(it)
             }
             showSnackBar("${selectedRecipes.size} Recipe/s removed.")
 

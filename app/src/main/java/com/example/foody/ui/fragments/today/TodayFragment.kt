@@ -21,11 +21,13 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class TodayFragment : Fragment() {
 
+
     private val mainViewModel by viewModels<MainViewModel>()
 
     private var _binding: FragmentTodayBinding? = null
     private val binding get() = _binding!!
 
+    private var foodJoke = "No Food Joke"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,12 +36,18 @@ class TodayFragment : Fragment() {
 
         _binding = FragmentTodayBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.mainViewModel = mainViewModel
+
+        setHasOptionsMenu(true)
 
         mainViewModel.getFoodJoke(API_KEY)
         mainViewModel.foodJokeResponse.observe(viewLifecycleOwner, { response ->
-            when (response) {
+            when(response){
                 is NetworkResult.Success -> {
                     binding.foodJokeTextView.text = response.data?.text
+                    if(response.data != null){
+                        foodJoke = response.data.text
+                    }
                 }
                 is NetworkResult.Error -> {
                     loadDataFromCache()
@@ -48,15 +56,13 @@ class TodayFragment : Fragment() {
                         response.message.toString(),
                         Toast.LENGTH_SHORT
                     ).show()
-
                 }
                 is NetworkResult.Loading -> {
-                    Log.d("TodayFragment", "Loading")
+                    Log.d("FoodJokeFragment", "Loading")
                 }
-
             }
-
         })
+
         return binding.root
     }
 
@@ -64,7 +70,7 @@ class TodayFragment : Fragment() {
         lifecycleScope.launch {
             mainViewModel.readFoodJoke.observe(viewLifecycleOwner, { database ->
                 if (database.isNotEmpty() && database != null) {
-                    binding.foodJokeTextView.text = database[0].text
+                    binding.foodJokeTextView.text = database[0].foodJoke.text
                 }
             })
         }
